@@ -159,7 +159,7 @@ const PreviousDemo = () => {
                   background: '#f8f9fa',
                 }}
               >
-                <strong>{change.type}</strong>: {change.from} → {change.to}
+                <strong>{change.type}</strong>: {String(change.from)} → {String(change.to)}
                 <span style={{ float: 'right', fontSize: '12px', color: '#666' }}>
                   {change.timestamp}
                 </span>

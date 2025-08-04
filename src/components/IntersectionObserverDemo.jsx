@@ -1,6 +1,39 @@
 import React, { useState } from 'react';
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 
+// 创建单独的图片组件来处理 hooks
+const LazyImage = ({ index }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const { ref: imageRef, isIntersecting: isImageVisible } = useIntersectionObserver({
+    threshold: 0.1,
+    triggerOnce: true,
+  });
+
+  React.useEffect(() => {
+    if (isImageVisible) {
+      setIsVisible(true);
+    }
+  }, [isImageVisible]);
+
+  return (
+    <div
+      ref={imageRef}
+      style={{
+        height: '150px',
+        background: isVisible ? '#2ed573' : '#ddd',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: '8px',
+        color: isVisible ? 'white' : '#666',
+        fontSize: '14px',
+      }}
+    >
+      {isVisible ? '图片已加载' : '图片未加载'}
+    </div>
+  );
+};
+
 const IntersectionObserverDemo = () => {
   const [visibleItems, setVisibleItems] = useState(new Set());
   const [lazyLoadedItems, setLazyLoadedItems] = useState([]);
@@ -166,38 +199,9 @@ const IntersectionObserverDemo = () => {
       <div style={{ marginBottom: '40px' }}>
         <h3>图片懒加载模拟</h3>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '15px' }}>
-          {Array.from({ length: 6 }, (_, i) => {
-            const [isVisible, setIsVisible] = useState(false);
-            const { ref: imageRef, isIntersecting: isImageVisible } = useIntersectionObserver({
-              threshold: 0.1,
-              triggerOnce: true,
-            });
-
-            React.useEffect(() => {
-              if (isImageVisible) {
-                setIsVisible(true);
-              }
-            }, [isImageVisible]);
-
-            return (
-              <div
-                key={i}
-                ref={imageRef}
-                style={{
-                  height: '150px',
-                  background: isVisible ? '#2ed573' : '#ddd',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  borderRadius: '8px',
-                  color: isVisible ? 'white' : '#666',
-                  fontSize: '14px',
-                }}
-              >
-                {isVisible ? '图片已加载' : '图片未加载'}
-              </div>
-            );
-          })}
+          {Array.from({ length: 6 }, (_, i) => (
+            <LazyImage key={i} index={i} />
+          ))}
         </div>
       </div>
 

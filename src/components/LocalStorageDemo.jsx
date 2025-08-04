@@ -57,7 +57,7 @@ const LocalStorageDemo = () => {
           placeholder="输入内容会自动保存到localStorage"
           style={{ width: '100%', padding: '8px' }}
         />
-        <p>当前值: {basicValue}</p>
+        <p>当前值: {typeof basicValue === 'object' ? JSON.stringify(basicValue) : basicValue}</p>
       </div>
 
       <div style={{ marginBottom: '20px' }}>
@@ -69,7 +69,7 @@ const LocalStorageDemo = () => {
           placeholder="输入内容会加密存储"
           style={{ width: '100%', padding: '8px' }}
         />
-        <p>当前值: {encryptedValue}</p>
+        <p>当前值: {typeof encryptedValue === 'object' ? JSON.stringify(encryptedValue) : encryptedValue}</p>
         <p style={{ fontSize: '12px', color: '#666' }}>
           在浏览器开发者工具的Application标签页中查看，数据是加密的
         </p>
@@ -84,7 +84,7 @@ const LocalStorageDemo = () => {
           placeholder="输入内容5秒后过期"
           style={{ width: '100%', padding: '8px' }}
         />
-        <p>当前值: {expiringValue}</p>
+        <p>当前值: {typeof expiringValue === 'object' ? JSON.stringify(expiringValue) : expiringValue}</p>
         <p style={{ fontSize: '12px', color: '#666' }}>
           5秒后刷新页面，这个值会消失
         </p>

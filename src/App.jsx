@@ -10,6 +10,15 @@ import DebounceDemo from './components/DebounceDemo';
 import AsyncDemo from './components/AsyncDemo';
 import IntersectionObserverDemo from './components/IntersectionObserverDemo';
 import PreviousDemo from './components/PreviousDemo';
+import VirtualScrollDemo from './components/VirtualScrollDemo';
+import DragSortDemo from './components/DragSortDemo';
+import FormValidationDemo from './components/FormValidationDemo';
+import ThemeToggleDemo from './components/ThemeToggleDemo';
+import AnimationDemo from './components/AnimationDemo';
+import WebSocketDemo from './components/WebSocketDemo';
+import FileUploadDemo from './components/FileUploadDemo';
+import GeolocationDemo from './components/GeolocationDemo';
+import QRCodeDemo from './components/QRCodeDemo';
 
 function App() {
   const [activeDemo, setActiveDemo] = useState('localStorage');
@@ -20,6 +29,15 @@ function App() {
     { id: 'async', name: 'useAsync', component: AsyncDemo },
     { id: 'intersection', name: 'useIntersectionObserver', component: IntersectionObserverDemo },
     { id: 'previous', name: 'usePrevious', component: PreviousDemo },
+    { id: 'virtualScroll', name: '虚拟滚动', component: VirtualScrollDemo },
+    { id: 'dragSort', name: '拖拽排序', component: DragSortDemo },
+    { id: 'formValidation', name: '表单验证', component: FormValidationDemo },
+    { id: 'themeToggle', name: '主题切换', component: ThemeToggleDemo },
+    { id: 'animation', name: '动画效果', component: AnimationDemo },
+    { id: 'websocket', name: 'WebSocket通信', component: WebSocketDemo },
+    { id: 'fileUpload', name: '文件上传', component: FileUploadDemo },
+    { id: 'geolocation', name: '地理位置', component: GeolocationDemo },
+    { id: 'qrcode', name: '二维码生成器', component: QRCodeDemo },
     { id: 'performance', name: 'Performance Chart', component: PerformanceChart },
     { id: 'redux', name: 'Redux Counter', component: ReduxCounter },
     { id: 'example', name: 'Example Hook', component: ExampleHookComponent },

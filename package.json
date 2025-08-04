@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "node scripts/dev-start.js",
+    "dev": "node scripts/dev-start.js",
+    "build": "node scripts/fun-build.js",
+    "build:original": "react-scripts build",
     "test": "react-scripts test",
+    "test:fun": "node scripts/test-fun.js",
     "eject": "react-scripts eject"
   },
   "dependencies": {
@@ -16,6 +19,12 @@
     "react-dom": "^18.0.0",
     "react-redux": "^9.2.0",
     "react-scripts": "5.0.0"
+  },
+  "devDependencies": {
+    "boxen": "^7.1.1",
+    "chalk": "^4.1.2",
+    "cli-progress": "^3.12.0",
+    "ora": "^5.4.1"
   },
   "eslintConfig": {
     "extends": [
