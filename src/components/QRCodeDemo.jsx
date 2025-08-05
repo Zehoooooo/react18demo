@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 const QRCodeDemo = () => {
   const [qrType, setQrType] = useState('text');
@@ -31,15 +31,32 @@ const QRCodeDemo = () => {
     setIsGenerating(true);
     
     try {
+      // 验证数据长度（二维码有容量限制）
+      if (data.length > 2000) {
+        alert('数据内容过长，请减少内容');
+        setIsGenerating(false);
+        return;
+      }
+      
       // 使用在线QR码生成API
-      const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=${qrSize}x${qrSize}&data=${encodeURIComponent(data)}&color=${qrColor.replace('#', '')}&bgcolor=${bgColor.replace('#', '')}`;
+      const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=${qrSize}x${qrSize}&data=${encodeURIComponent(data)}&color=${qrColor.replace('#', '')}&bgcolor=${bgColor.replace('#', '')}&format=png&margin=2`;
       
       // 模拟生成延迟
       await new Promise(resolve => setTimeout(resolve, 1000));
       
-      setQrImage(qrUrl);
+      // 验证图片是否可以加载
+      const img = new Image();
+      img.onload = () => {
+        setQrImage(qrUrl);
+      };
+      img.onerror = () => {
+        alert('二维码生成失败，请检查网络连接或重试');
+      };
+      img.src = qrUrl;
+      
     } catch (error) {
       console.error('生成二维码失败:', error);
+      alert('生成二维码失败，请重试');
     } finally {
       setIsGenerating(false);
     }
@@ -54,10 +71,23 @@ const QRCodeDemo = () => {
         return qrData.startsWith('http') ? qrData : `https://${qrData}`;
       case 'wifi':
         const { ssid, password, encryption, hidden } = wifiData;
-        return `WIFI:T:${encryption};S:${ssid};P:${password};H:${hidden};`;
+        // 修复WiFi二维码格式，确保所有字段都正确编码
+        const wifiString = `WIFI:T:${encryption};S:${ssid || ''};P:${password || ''};H:${hidden ? 'true' : 'false'};`;
+        return wifiString;
       case 'contact':
         const { name, phone, email, company, title } = contactData;
-        return `BEGIN:VCARD\nVERSION:3.0\nFN:${name}\nTEL:${phone}\nEMAIL:${email}\nORG:${company}\nTITLE:${title}\nEND:VCARD`;
+        // 确保vCard格式正确，过滤空值
+        const vCardLines = [
+          'BEGIN:VCARD',
+          'VERSION:3.0',
+          name && `FN:${name}`,
+          phone && `TEL:${phone}`,
+          email && `EMAIL:${email}`,
+          company && `ORG:${company}`,
+          title && `TITLE:${title}`,
+          'END:VCARD'
+        ].filter(Boolean); // 过滤掉空值
+        return vCardLines.join('\n');
       case 'email':
         return `mailto:${qrData}`;
       case 'phone':
@@ -70,9 +100,24 @@ const QRCodeDemo = () => {
   // 生成二维码
   const handleGenerate = () => {
     const data = getQRData();
-    if (data.trim()) {
-      generateQRCode(data);
+    // 添加数据验证
+    if (!data.trim()) {
+      alert('请输入内容');
+      return;
     }
+    
+    // 特殊验证
+    if (qrType === 'wifi' && !wifiData.ssid.trim()) {
+      alert('请输入WiFi名称');
+      return;
+    }
+    
+    if (qrType === 'contact' && !contactData.name.trim()) {
+      alert('请输入联系人姓名');
+      return;
+    }
+    
+    generateQRCode(data);
   };
 
   // 下载二维码

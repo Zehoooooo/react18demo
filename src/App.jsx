@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import BasicHooksDemo from './components/BasicHooksDemo';
+import FunctionComponentDemo from './components/FunctionComponentDemo';
+import UseCallbackDetailedDemo from './components/UseCallbackDetailedDemo';
 import ExampleHookComponent from './components/ExampleHookComponent';
 import HooksDemo from './components/HooksDemo';
 import ParentDemo from './components/ParentDemo';
@@ -21,9 +24,12 @@ import GeolocationDemo from './components/GeolocationDemo';
 import QRCodeDemo from './components/QRCodeDemo';
 
 function App() {
-  const [activeDemo, setActiveDemo] = useState('localStorage');
+  const [activeDemo, setActiveDemo] = useState('basicHooks');
 
   const demos = [
+    { id: 'basicHooks', name: '基础Hooks演示', component: BasicHooksDemo },
+    { id: 'functionComponent', name: '函数组件基础', component: FunctionComponentDemo },
+    { id: 'useCallback', name: 'useCallback详解', component: UseCallbackDetailedDemo },
     { id: 'localStorage', name: 'useLocalStorage', component: LocalStorageDemo },
     { id: 'debounce', name: 'useDebounce', component: DebounceDemo },
     { id: 'async', name: 'useAsync', component: AsyncDemo },
