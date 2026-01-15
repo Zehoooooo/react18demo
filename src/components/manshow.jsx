@@ -59,11 +59,6 @@ export default function Manshow() {
     const handleSearchChange = useCallback((e) => {
         setSearch(e.target.value)
     }, [])
-    
-    const handleDrop = useCallback(e => {
-        var intOuterFramesetWidth = top.innerWidth;
-        var intOuterFramesetHeight = top.innerHeight;
-    })
 
     // 使用 useCallback 缓存用户选择函数
     const handleUserSelect = useCallback((user) => {
