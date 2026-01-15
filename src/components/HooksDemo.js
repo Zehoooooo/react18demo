@@ -14,7 +14,7 @@ function HooksDemo() {
         }
     });
     useEffect(() => {
-        document.title = `输入了: ${text}`;
+        // document.title = `输入了: ${text}`;
     }, [text]);
 
     const focusInput = () => {

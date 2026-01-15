@@ -1,9 +1,9 @@
-import React, { 
-  useState, 
-  useEffect, 
-  useContext, 
-  useReducer, 
-  useCallback, 
+import React, {
+  useState,
+  useEffect,
+  useContext,
+  useReducer,
+  useCallback,
   useMemo,
   useRef,
   useImperativeHandle,
@@ -76,7 +76,6 @@ const BasicHooksDemo = () => {
   
   // useEffect 演示
   useEffect(() => {
-    document.title = `计数: ${count}`;
     console.log('useEffect: count changed to', count);
     
     return () => {
@@ -109,6 +108,8 @@ const BasicHooksDemo = () => {
   const isEven = useMemo(() => {
     return count % 2 === 0;
   }, [count]);
+  
+
 
   return (
     <ThemeContext.Provider value={theme}>
@@ -120,7 +121,7 @@ const BasicHooksDemo = () => {
         {/* useState 演示 */}
         <div style={{ marginBottom: '30px' }}>
           <h3 style={{ color: '#667eea' }}>1. useState Hook</h3>
-          <div style={{ padding: '15px', backgroundColor: '#f8f9fa', borderRadius: '6px' }}>
+          <div style={{ padding: '15px', backgroundColor: '#f8f9fa', borderRadius: '6px', marginBottom: '15px' }}>
             <p><strong>计数:</strong> {count}</p>
             <div style={{ marginBottom: '10px' }}>
               <button onClick={handleIncrement} style={{ marginRight: '10px' }}>增加</button>
@@ -142,22 +143,25 @@ const BasicHooksDemo = () => {
               {name && <p>你好, {name}!</p>}
             </div>
           </div>
+          
         </div>
 
         {/* useEffect 演示 */}
         <div style={{ marginBottom: '30px' }}>
           <h3 style={{ color: '#667eea' }}>2. useEffect Hook</h3>
-          <div style={{ padding: '15px', backgroundColor: '#f8f9fa', borderRadius: '6px' }}>
+          <div style={{ padding: '15px', backgroundColor: '#f8f9fa', borderRadius: '6px', marginBottom: '15px' }}>
             <p>当前计数: {count}</p>
             <p>页面标题会根据计数变化 (请查看浏览器标签页)</p>
             <p>请打开控制台查看useEffect的执行日志</p>
           </div>
+          
+
         </div>
 
         {/* useReducer 演示 */}
         <div style={{ marginBottom: '30px' }}>
           <h3 style={{ color: '#667eea' }}>3. useReducer Hook</h3>
-          <div style={{ padding: '15px', backgroundColor: '#f8f9fa', borderRadius: '6px' }}>
+          <div style={{ padding: '15px', backgroundColor: '#f8f9fa', borderRadius: '6px', marginBottom: '15px' }}>
             <p><strong>Reducer计数:</strong> {state.count}</p>
             <div>
               <button onClick={() => dispatch({ type: 'increment' })} style={{ marginRight: '10px' }}>增加</button>
@@ -165,12 +169,14 @@ const BasicHooksDemo = () => {
               <button onClick={() => dispatch({ type: 'reset' })}>重置</button>
             </div>
           </div>
+          
+
         </div>
 
         {/* useContext 演示 */}
         <div style={{ marginBottom: '30px' }}>
           <h3 style={{ color: '#667eea' }}>4. useContext Hook</h3>
-          <div style={{ padding: '15px', backgroundColor: '#f8f9fa', borderRadius: '6px' }}>
+          <div style={{ padding: '15px', backgroundColor: '#f8f9fa', borderRadius: '6px', marginBottom: '15px' }}>
             <div style={{ marginBottom: '10px' }}>
               <button 
                 onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
@@ -181,12 +187,14 @@ const BasicHooksDemo = () => {
             </div>
             <ThemeComponent />
           </div>
+          
+
         </div>
 
         {/* useCallback 演示 */}
         <div style={{ marginBottom: '30px' }}>
           <h3 style={{ color: '#667eea' }}>5. useCallback Hook</h3>
-          <div style={{ padding: '15px', backgroundColor: '#f8f9fa', borderRadius: '6px' }}>
+          <div style={{ padding: '15px', backgroundColor: '#f8f9fa', borderRadius: '6px', marginBottom: '15px' }}>
             <p>useCallback用于缓存函数，避免不必要的重新渲染</p>
             <p>当前计数: {count}</p>
             <div>
@@ -194,12 +202,14 @@ const BasicHooksDemo = () => {
               <button onClick={handleDecrement} style={{ marginRight: '10px' }}>减少 (useCallback)</button>
             </div>
           </div>
+          
+
         </div>
 
         {/* useMemo 演示 */}
         <div style={{ marginBottom: '30px' }}>
           <h3 style={{ color: '#667eea' }}>6. useMemo Hook</h3>
-          <div style={{ padding: '15px', backgroundColor: '#f8f9fa', borderRadius: '6px' }}>
+          <div style={{ padding: '15px', backgroundColor: '#f8f9fa', borderRadius: '6px', marginBottom: '15px' }}>
             <p><strong>当前计数:</strong> {count}</p>
             <p><strong>计算结果 (count * 2):</strong> {expensiveCalculation}</p>
             <p><strong>是否为偶数:</strong> {isEven ? '是' : '否'}</p>
@@ -207,12 +217,14 @@ const BasicHooksDemo = () => {
               注意: 打开控制台可以看到useMemo只在依赖项变化时才执行计算
             </p>
           </div>
+          
+
         </div>
 
         {/* useRef 演示 */}
         <div style={{ marginBottom: '30px' }}>
           <h3 style={{ color: '#667eea' }}>7. useRef Hook</h3>
-          <div style={{ padding: '15px', backgroundColor: '#f8f9fa', borderRadius: '6px' }}>
+          <div style={{ padding: '15px', backgroundColor: '#f8f9fa', borderRadius: '6px', marginBottom: '15px' }}>
             <div style={{ marginBottom: '15px' }}>
               <input
                 ref={inputRef}
@@ -241,6 +253,8 @@ const BasicHooksDemo = () => {
               </div>
             </div>
           </div>
+          
+
         </div>
 
         {/* 综合演示 */}
@@ -265,4 +279,4 @@ const BasicHooksDemo = () => {
   );
 };
 
-export default BasicHooksDemo; 
+export default BasicHooksDemo;

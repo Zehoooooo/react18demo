@@ -3,6 +3,7 @@
 const { spawn } = require('child_process');
 const ora = require('ora');
 const chalk = require('chalk');
+chalk.level = 3
 
 // 显示启动信息
 const showStartupInfo = () => {
